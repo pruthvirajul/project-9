@@ -1,0 +1,305 @@
+
+EMPLOYEE TRAINING 
+
+--------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Training Dashboard</title>
+  <!-- <link rel="stylesheet" href="../Training-Management/Training.css"> -->
+   <style>
+    /* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  /* padding: 2rem; */
+}
+
+.container {
+  /* max-width: 1200px;
+  margin: 0 auto; */
+  width: 100%;
+}
+
+header {
+  background-color: rgba(0, 0, 255, 0.753)
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1); /* Softer text-shadow */
+  margin-bottom: 1rem;
+  font-size: 3rem; /* Adjusted for a larger, more impactful heading */
+  font-family: 'Arial', sans-serif; /* Use a clean, modern font */
+  font-weight: 600; /* Slightly bolder font weight for emphasis */
+  
+  /* Adding a smooth animation */
+  animation: fadeIn 1s ease-out, slideIn 1s ease-out;
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Keyframes for sliding animation */
+@keyframes slideIn {
+  0% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Training methods grid */
+.training-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+/* Method cards */
+.method {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.method:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.method::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.method:hover::before {
+  transform: scaleX(1);
+}
+
+.method h2 {
+  color: #34495e;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.method p {
+  color: #7f8c8d;
+  margin-bottom: 1.5rem;
+}
+
+/* Button styles */
+.learn-more {
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.learn-more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 201, 255, 0.3);
+}
+
+.learn-more:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Method-specific colors */
+.method[data-type="on-the-job"]::before {
+  background: linear-gradient(90deg, #FF416C 0%, #FF4B2B 100%);
+}
+
+.method[data-type="classroom"]::before {
+  background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+}
+
+.method[data-type="e-learning"]::before {
+  background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+}
+
+.method[data-type="coaching"]::before {
+  background: linear-gradient(90deg, #F857A6 0%, #FF5858 100%);
+}
+
+.method[data-type="cross-training"]::before {
+  background: linear-gradient(90deg, #7F00FF 0%, #E100FF 100%);
+}
+
+.method[data-type="soft-skills"]::before {
+  background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0rem;
+  }
+
+  .training-methods {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .method {
+    padding: 1.2rem;
+  }
+
+  .method h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Loading animation for async content */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.loading {
+  animation: shimmer 1s linear infinite;
+  background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-size: 800px 104px;
+  position: relative;
+}
+   </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+    <h1>EMPLOYEE TRAINING METHODS</h1>
+  </header>
+    <div class="training-methods">
+      <div class="method" data-type="on-the-job">
+        <h2>On-the-Job Training</h2>
+        <p>Learn while you work on the job.</p>
+        <button class="learn-more">Learn More</button>
+      </div>
+      <div class="method" data-type="classroom">
+        <h2>Classroom Training</h2>
+        <p>Structured in-person learning sessions.</p>
+        <button class="learn-more">Learn More</button>
+      </div>
+      <div class="method" data-type="e-learning">
+        <h2>E-Learning</h2>
+        <p>Self-paced online training modules.</p>
+        <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp/learn/lecture/12638830?start=60#overview" target="_blank"><button class="learn-more">Learn More</button></a>
+      </div>
+      <div class="method" data-type="coaching">
+        <h2>Coaching/Mentoring</h2>
+        <p>One-on-one guidance and support.</p>
+        <button class="learn-more">Learn More</button>
+      </div>
+      <div class="method" data-type="cross-training">
+        <h2>Cross-Training</h2>
+        <p>Learn skills outside your primary role.</p>
+        <button class="learn-more">Learn More</button>
+      </div>
+      <div class="method" data-type="soft-skills">
+        <h2>Soft Skills Training</h2>
+        <p>Develop interpersonal and communication skills.</p>
+        <button class="learn-more">Learn More</button>
+      </div>
+      <div class="method" data-type="compliance">
+        <h2>Compliance Training</h2>
+        <p>Ensure adherence to company policies and regulations.</p>
+        <button class="learn-more">Learn More</button>
+      </div>
+    </div>
+  </div>
+  <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const trainingMethods = document.querySelectorAll('.method');
+  
+    trainingMethods.forEach((method) => {
+      method.addEventListener('click', () => {
+        const type = method.dataset.type;
+        displayTrainingDetails(type);
+      });
+    });
+  });
+  
+  function displayTrainingDetails(type) {
+    // Implement logic to display more details about the selected training method
+    // This could include fetching data from an API, showing a modal, or navigating to a dedicated page
+    console.log(`Displaying details for ${type} training.`);
+  }
+</script>
+</body>
+</html>
+apps-fileview.texmex_20250410.00_p0
+EMPLOYEE TRAINING MANAGEMENT.txt
+Displaying EMPLOYEE TRAINING MANAGEMENT.txt.
